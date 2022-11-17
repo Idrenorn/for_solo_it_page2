@@ -1,56 +1,50 @@
-@import '@taiga-ui/core/styles/taiga-ui-local.less';
+@import '~@taiga-ui/core/styles/taiga-ui-local';
 
-:host {
-  display: block;
-}
+td,
+th {
+    white-space: nowrap;
+    border-color: transparent;
+    border-right-color: var(--tui-base-04);
 
-.stepper {
-  margin-bottom: 2rem;
-}
-
-.uppercase-name {
-  text-transform: uppercase;
-}
-
-.account {
-  display: flex;
-  flex: 1;
-  justify-content: space-between;
+    &:last-child {
+        border-right-color: transparent;
+    }
 }
 
-.ticks-labels {
-  .tui-slider-ticks-labels();
-
-  color: var(--tui-text-02);
-  margin-top: 0.25rem;
-}
-.success {
-  position: relative;
-  color: var(--tui-success-fill);
-}
-.title {
-  font: var(--tui-font-heading-6);
-  margin: 1.5rem 0 0.75rem;
-}
-.description {
-  font: var(--tui-font-text-m);
+tbody {
+    border-color: transparent;
 }
 
-.row {
-  display: flex;
-
-  &_align-items_bottom {
-      align-items: flex-end;
-  }
+tr:nth-child(even) td {
+    background: var(--tui-base-02);
 }
-.example {
-  font: var(--tui-font-text-m);
-  .shadow(1);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 11.25rem;
-  height: 4.6875rem;
-  background-color: var(--tui-base-01);
-  border-radius: var(--tui-radius-m);
+
+.alive,
+.deceased {
+    display: flex;
+    align-items: center;
+    text-transform: capitalize;
+
+    &:before {
+        content: '';
+        width: 0.5rem;
+        height: 0.5rem;
+        border-radius: 100%;
+        margin-right: 0.5rem;
+        background: var(--tui-base-04);
+    }
+}
+
+.alive:before {
+    background: var(--tui-success-fill);
+}
+
+.remove {
+    .transition(opacity);
+    opacity: 0;
+
+    tr:hover &,
+    tr:focus-within & {
+        opacity: 1;
+    }
 }

@@ -1,44 +1,61 @@
 import {ChangeDetectionStrategy, Component} from '@angular/core';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {TUI_PASSWORD_TEXTS, tuiInputPasswordOptionsProvider} from '@taiga-ui/kit';
-import {of} from 'rxjs';
 
-
+interface User {
+    readonly name: string;
+    readonly email: string;
+    readonly status: 'alive' | 'deceased';
+    readonly tags: readonly string[];
+}
 
 @Component({
-    selector: `my-app`,
-    templateUrl: `./app.component.html`,
-    styleUrls: ["./app.component.less"],
+    selector: `tui-table-example-2`,
+    templateUrl: `./index.html`,
+    styleUrls: [`./index.less`],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [
-      tuiInputPasswordOptionsProvider({
-          icons: {
-              hide: `tuiIconLockLarge`,
-              show: `tuiIconLockOpenLarge`,
-          },
-      }),
-      {
-          provide: TUI_PASSWORD_TEXTS,
-          useValue: of([``]),
-      },
-  ],
 })
+export class TuiTableExample2 {
+    readonly columns = [`name`, `email`, `status`, `tags`, `actions`];
 
-      
-  
+    users: readonly User[] = [
+        {
+            name: `Michael Palin`,
+            email: `m.palin@montypython.com`,
+            status: `alive`,
+            tags: [`Funny`],
+        },
+        {
+            name: `Eric Idle`,
+            email: `e.idle@montypython.com`,
+            status: `alive`,
+            tags: [`Funny`, `Music`],
+        },
+        {
+            name: `John Cleese`,
+            email: `j.cleese@montypython.com`,
+            status: `alive`,
+            tags: [`Funny`, `Tall`, `Actor`],
+        },
+        {
+            name: `Terry Jones`,
+            email: ``,
+            status: `deceased`,
+            tags: [`Funny`, `Director`],
+        },
+        {
+            name: `Terry Gilliam`,
+            email: `t.gilliam@montypython.com`,
+            status: `alive`,
+            tags: [`Funny`, `Director`],
+        },
+        {
+            name: `Graham Chapman`,
+            email: ``,
+            status: `deceased`,
+            tags: [`Funny`, `King Arthur`],
+        },
+    ];
 
-export class AppComponent {
-    readonly testForm = new FormGroup({
-        testValue: new FormControl(``),
-    });
-    readonly control = new FormControl(null, [
-      Validators.required,
-      Validators.minLength(5),
-  ]);
-}
-  export class TuiInputPasswordExample2 {
-    testForm = new FormGroup({
-        testValue: new FormControl(`password`, Validators.required),
-    });
-  
+    remove(item: User): void {
+        this.users = this.users.filter(user => user !== item);
+    }
 }

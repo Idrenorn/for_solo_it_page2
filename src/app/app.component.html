@@ -1,82 +1,103 @@
 <tui-root>
-  <div class="wrapper">
-    
-    <tui-notification
-        status="success"
-        class="tui-space_top-4"
+<table
+    tuiTable
+    [columns]="columns"
+>
+    <thead>
+        <tr tuiThGroup>
+            <th
+                *tuiHead="'name'"
+                tuiTh
+            >
+                Name
+            </th>
+            <th
+                *tuiHead="'email'"
+                tuiTh
+            >
+                E-mail
+            </th>
+            <th
+                *tuiHead="'status'"
+                tuiTh
+            >
+                Status
+            </th>
+            <th
+                *tuiHead="'tags'"
+                tuiTh
+                [sorter]="null"
+            >
+                Tags
+            </th>
+            <th
+                *tuiHead="'actions'"
+                tuiTh
+                [sorter]="null"
+            ></th>
+        </tr>
+    </thead>
+    <tbody
+        *tuiLet="users | tuiTableSort as sortedUsers"
+        tuiTbody
+        [data]="sortedUsers"
     >
-        Вы подключены к Bizon!
-    
-    </tui-notification>
-</div>
-<a
-    tuiLink
-    routerLink="/components/link"
->
-    Бизон
-</a>
-<form
-  class="b-form"
-  [formGroup]="testForm"
-  >
-    <p>
-      <tui-input
-              formControlName="testValue"
-              tuiHintContent="На этот адрес придет подтверждение"
-              [tuiTextfieldCleaner]="true"
-          >
-              Введите email&nbsp;
-              <span class="tui-required"></span>
-              <input
-                  tuiTextfield
-                  placeholder="@mail.ru"
-                  type="email"
-              />
-      </tui-input>
-    </p>
-</form>
-  <form
-  class="b-form"
-  [formGroup]="testForm"
->
-  <tui-input-password
-      formControlName="testValue"
-      tuiHintContent
-      tuiHintDirection="right"
-      tuiHintAppearance="onDark"
-  >
-      Введите токен
-  </tui-input-password>
-</form>
-  <div>
-    <p>
-      <button
-      tuiButton
-      appearance="custom"
-      >
-    Сохранить
-      </button>
-      </p>
-    </div>
-<div class="wrapper">
-    <tui-notification
-    status="warning"
-    class="tui-space_top-4"
->
-    ВАЖНО! В Бизон нужно обязательно&nbsp;сохранять токен&nbsp;&nbsp;&nbsp;
-</tui-notification>
-</div> 
-  <button tuiAction>
-  <section>
-      <h3 class="header tui-text_h6">Где получить токен</h3>
-      <p class="description tui-text_body-m">
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/4Q9-v2L4h3U" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-      </p>
-  </section>
-  <tui-marker-icon
-      size="m"
-      src="tuiIconFlagLarge"
-      class="tui-island__marker icon"
-  ></tui-marker-icon>
-</button>
+        <tr
+            *ngFor="let item of sortedUsers; let index = index"
+            tuiTr
+        >
+            <td
+                *tuiCell="'name'"
+                tuiTd
+            >
+                {{ index + 1 }}. {{ item.name }}
+            </td>
+            <td
+                *tuiCell="'email'"
+                tuiTd
+            >
+                <a
+                    *ngIf="item.email"
+                    tuiLink
+                    [href]="'mailto:' + item.email"
+                >
+                    {{ item.email }}
+                </a>
+            </td>
+            <td
+                *tuiCell="'status'"
+                tuiTd
+            >
+                <div [class]="item.status">{{ item.status }}</div>
+            </td>
+            <td
+                *tuiCell="'tags'"
+                tuiTd
+            >
+                <tui-tag
+                    *ngFor="let tag of item.tags"
+                    class="tui-space_right-1"
+                    [value]="tag"
+                    [autoColor]="true"
+                ></tui-tag>
+            </td>
+            <td
+                *tuiCell="'actions'"
+                tuiTd
+            >
+                <button
+                    tuiIconButton
+                    appearance="flat"
+                    size="s"
+                    icon="tuiIconTrash"
+                    title="Remove"
+                    shape="rounded"
+                    class="remove"
+                    (click)="remove(item)"
+                ></button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
 </tui-root>
