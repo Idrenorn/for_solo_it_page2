@@ -1,0 +1,82 @@
+<tui-root>
+  <div class="wrapper">
+    
+    <tui-notification
+        status="success"
+        class="tui-space_top-4"
+    >
+        Вы подключены к Bizon!
+    
+    </tui-notification>
+</div>
+<a
+    tuiLink
+    routerLink="/components/link"
+>
+    Бизон
+</a>
+<form
+  class="b-form"
+  [formGroup]="testForm"
+  >
+    <p>
+      <tui-input
+              formControlName="testValue"
+              tuiHintContent="На этот адрес придет подтверждение"
+              [tuiTextfieldCleaner]="true"
+          >
+              Введите email&nbsp;
+              <span class="tui-required"></span>
+              <input
+                  tuiTextfield
+                  placeholder="@mail.ru"
+                  type="email"
+              />
+      </tui-input>
+    </p>
+</form>
+  <form
+  class="b-form"
+  [formGroup]="testForm"
+>
+  <tui-input-password
+      formControlName="testValue"
+      tuiHintContent
+      tuiHintDirection="right"
+      tuiHintAppearance="onDark"
+  >
+      Введите токен
+  </tui-input-password>
+</form>
+  <div>
+    <p>
+      <button
+      tuiButton
+      appearance="custom"
+      >
+    Сохранить
+      </button>
+      </p>
+    </div>
+<div class="wrapper">
+    <tui-notification
+    status="warning"
+    class="tui-space_top-4"
+>
+    ВАЖНО! В Бизон нужно обязательно&nbsp;сохранять токен&nbsp;&nbsp;&nbsp;
+</tui-notification>
+</div> 
+  <button tuiAction>
+  <section>
+      <h3 class="header tui-text_h6">Где получить токен</h3>
+      <p class="description tui-text_body-m">
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/4Q9-v2L4h3U" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </p>
+  </section>
+  <tui-marker-icon
+      size="m"
+      src="tuiIconFlagLarge"
+      class="tui-island__marker icon"
+  ></tui-marker-icon>
+</button>
+</tui-root>

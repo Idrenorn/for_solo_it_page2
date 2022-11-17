@@ -1,0 +1,41 @@
+@import '@taiga-ui/styles/taiga-ui-global.less';
+@import '@taiga-ui/core/styles/theme/variables.less';
+/**
+THIS IS A WORKAROUND FOR STACKBLITZ:
+DO NOT REPEAT, read https://taiga-ui.dev/getting-started#less
+ */
+@import 'theme/wrapper.less';
+
+
+// This goes into global, unencapsulated styles
+.wrapper {
+  padding: 0.75rem;
+
+  &_dark {
+      background-color: #30406a;
+  }
+
+  &_light {
+      background-color: #e5e7ea;
+  }
+}
+
+[tuiWrapper][data-appearance='custom'] {
+    background: #5a4bdd;
+    color: #fff;
+
+    .wrapper-hover({
+        background: #290b7c;
+    });
+
+    .wrapper-active({
+        background: #6133d8;
+    });
+
+    .wrapper-disabled({
+        background: #0a539c;
+    });
+}
+
+
+
